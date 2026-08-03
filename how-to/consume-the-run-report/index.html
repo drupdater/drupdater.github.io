@@ -1,0 +1,3223 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Automated, reviewable Drupal updates — as a pull or merge request, on every schedule.">
+      
+      
+        <meta name="author" content="Drupdater contributors">
+      
+      
+        <link rel="canonical" href="https://drupdater.github.io/how-to/consume-the-run-report/">
+      
+      
+        <link rel="prev" href="../enable-auto-merge/">
+      
+      
+        <link rel="next" href="../migrate-config-layout/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Consume the run report - Drupdater</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+    <script data-goatcounter="https://drupdater.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#consume-the-run-report" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Drupdater" class="md-header__button md-logo" aria-label="Drupdater" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Drupdater
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Consume the run report
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/drupdater/drupdater" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    drupdater/drupdater
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  How-to guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../explanation/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Explanation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Drupdater" class="md-nav__button md-logo" aria-label="Drupdater" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Drupdater
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/drupdater/drupdater" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    drupdater/drupdater
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/first-run/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your first run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/scheduled-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scheduled updates in CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-to guides
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-to guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github-actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run in GitHub Actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gitlab-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run in GitLab CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../run-preflight-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run preflight checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../update-multiple-sites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update multiple sites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-private-packagist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use a private Composer registry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enable-patch-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable patch management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enable-auto-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable auto-merge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consume the run report
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consume the run report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-just-check-the-exit-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why not just check the exit code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distinguish-nothing-to-do-from-broken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distinguish "nothing to do" from "broken"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assert-on-a-run-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assert on a run in CI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assert on a run in CI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choosing-what-to-expect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing what to expect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-check-the-report-against-composerlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-check the report against composer.lock
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collect-the-report-as-a-ci-artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collect the report as a CI artifact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#track-runs-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track runs over time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Credentials
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrate-config-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrate the config layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshoot a run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/cli/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Command line
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/drupdater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    drupdater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    drupdater check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/addons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    drupdater addons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/environment-variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/addons/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Addons
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Addons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-allow-plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_allow_plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-patches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_patches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-diff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_diff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/update-hooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    update_hooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_audit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/code-beautifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    code_beautifier
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/deprecations-remover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    deprecations_remover
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/translations-updater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    translations_updater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-normalizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_normalizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/unsupported-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    unsupported_modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/run-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/preflight-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preflight checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/docker-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../explanation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Explanation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/how-a-run-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How a run works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/addon-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The addon architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/configuration-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The configuration model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/why-a-run-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why a run report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/credentials-and-redaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credentials and redaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/vcs-provider-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VCS provider detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/non-goals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What Drupdater does not do
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../contributing/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/writing-an-addon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing an addon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/releasing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/security-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-just-check-the-exit-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why not just check the exit code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distinguish-nothing-to-do-from-broken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distinguish "nothing to do" from "broken"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assert-on-a-run-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assert on a run in CI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assert on a run in CI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choosing-what-to-expect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing what to expect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-check-the-report-against-composerlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-check the report against composer.lock
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collect-the-report-as-a-ci-artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collect the report as a CI artifact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#track-runs-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track runs over time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Credentials
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/drupdater/drupdater/edit/main/docs/how-to/consume-the-run-report.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="consume-the-run-report">Consume the run report<a class="headerlink" href="#consume-the-run-report" title="Permanent link">&para;</a></h1>
+<p><code>--report</code> writes a <a href="../../reference/run-report/">JSON document</a> describing the run, on
+every outcome — success, failure, and <code>--dry-run</code> alike. This page covers what to do with
+it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>drupdater<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DRUPDATER_TOKEN</span><span class="s2">&quot;</span><span class="w"> </span>--report<span class="w"> </span>./drupdater-report.json
+</code></pre></div>
+<h2 id="why-not-just-check-the-exit-code">Why not just check the exit code<a class="headerlink" href="#why-not-just-check-the-exit-code" title="Permanent link">&para;</a></h2>
+<p>Because a run reports <code>success</code> even when an addon failed. Most addons log and swallow
+their own errors, so that the loss of, say, translation updates does not throw away an
+otherwise complete dependency update.</p>
+<p>That trade has a cost — an addon that broke would look exactly like one with nothing to
+do, and <a href="../../explanation/why-a-run-report/">one once did, for months</a>.</p>
+<p>Asserting that the addons you expect to run <strong>actually appear in the report</strong> is what
+turns a check from "it did not crash" into "it did what it is for".</p>
+<h2 id="quick-queries">Quick queries<a class="headerlink" href="#quick-queries" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Did anything change?</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.status&#39;</span><span class="w"> </span>report.json<span class="w">                    </span><span class="c1"># success | no_changes | failed</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># What changed?</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.packages[] | &quot;\(.action) \(.package) \(.from // &quot;-&quot;) → \(.to // &quot;-&quot;)&quot;&#39;</span><span class="w"> </span>report.json
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Where did the time go?</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.phases[] | &quot;\(.duration_seconds)s \(.name)&quot;&#39;</span><span class="w"> </span>report.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># What failed, and why?</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;select(.status == &quot;failed&quot;) | &quot;\(.failed_phase): \(.error)&quot;&#39;</span><span class="w"> </span>report.json
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># Which addons reported anything?</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.addons | keys[]&#39;</span><span class="w"> </span>report.json
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># What would the merge request say? (works on a --dry-run, which opens none)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.merge_request_description&#39;</span><span class="w"> </span>report.json
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1"># Which security advisories are still open?</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.addons.composer_audit.remaining[]? | &quot;\(.cve // .advisoryId) \(.packageName)&quot;&#39;</span><span class="w"> </span>report.json
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="c1"># Which packages were held back by a patch conflict?</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.addons.composer_patches.conflicts[]? | &quot;\(.package) held at \(.fixed_version)&quot;&#39;</span><span class="w"> </span>report.json
+</code></pre></div>
+<h2 id="distinguish-nothing-to-do-from-broken">Distinguish "nothing to do" from "broken"<a class="headerlink" href="#distinguish-nothing-to-do-from-broken" title="Permanent link">&para;</a></h2>
+<p><code>status</code> has three values, and the middle one matters:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>success</code></td>
+<td>The run did work and completed</td>
+</tr>
+<tr>
+<td><code>no_changes</code></td>
+<td>The run worked and found nothing to update</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>A phase errored — see <code>failed_phase</code> and <code>error</code></td>
+</tr>
+</tbody>
+</table>
+<p>Both <code>success</code> and <code>no_changes</code> exit <code>0</code>. A nightly security job on a healthy site
+produces <code>no_changes</code> every night, and that is the correct outcome, not a problem.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.status&#39;</span><span class="w"> </span>report.json<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>success<span class="o">)</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;update opened: </span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.merge_request.url&#39;</span><span class="w"> </span>report.json<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>no_changes<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;already up to date&quot;</span><span class="w"> </span><span class="p">;;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>failed<span class="o">)</span><span class="w">     </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;&quot;failed in \(.failed_phase): \(.error)&quot;&#39;</span><span class="w"> </span>report.json<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">esac</span>
+</code></pre></div>
+<h2 id="assert-on-a-run-in-ci">Assert on a run in CI<a class="headerlink" href="#assert-on-a-run-in-ci" title="Permanent link">&para;</a></h2>
+<p>Drupdater's own integration tests use a jq script for this, and it is directly reusable.</p>
+<p>It checks two different things. The <code>$expect</code> fields are what <em>your</em> project expects —
+status, a minimum package count, named phases present <strong>and</strong> succeeded, the phase a run is
+meant to fail in, named addons that reported something, packages that had to move, actions
+that must not appear. Everything
+after them is the report's own internal consistency and is always on: package changes have
+a shape, phases are ordered and unique, a <code>success</code> has no failed phase, a <code>--dry-run</code> has
+no merge request, an advisory is not both fixed and remaining, and an addon that reported
+data also rendered its section into the description.</p>
+<div class="highlight"><span class="filename">.github/assert-report.jq</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># Verifies a drupdater run report against a fixture&#39;s expectations.
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>#
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>#   jq -e --argjson expect &quot;$EXPECT&quot; -f .github/assert-report.jq report.json
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>#
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a># Gating on .status alone is a smoke test: a run reports success even when an
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a># addon failed, because most addons log and swallow their own errors. That is
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a># exactly how unsupported_modules stayed silently broken on Drupal 11 -- every
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a># run was green while the addon never reported a thing. Asserting that the
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a># addons a fixture is built to exercise actually appear in the report is what
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a># turns this job from &quot;it did not crash&quot; into &quot;it did what it is for&quot;.
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>#
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a># The checks come in two kinds. The $expect fields are per fixture: only the
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a># fixture knows what it was built to produce. Everything after them holds for
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a># *any* report -- they are the report&#39;s own internal consistency, need no
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a># fixture knowledge, and are therefore always on.
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>#
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a># $expect fields, all optional except status:
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>#   status          list of acceptable .status values
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>#   min_packages    minimum number of package changes
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>#   phases          phase names that must be present AND ok
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>#   failed_phase    the phase this run is meant to fail in
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>#   addons          keys that must appear under .addons
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>#   packages_match  regexes, each of which some package name must match
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>#   forbid_actions  package actions that must not appear at all
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>#   audit_fixed_min minimum number of advisories composer_audit closed
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>#
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a># Secrets are read from the DRUPDATER_ASSERT_SECRETS environment variable,
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a># newline separated, and asserted to appear nowhere in the document. Unset means
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a># the check is skipped.
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a># The phases in the order the workflow runs them. Used to check that the phases
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a># a run recorded are ordered and unique -- a report whose phases are shuffled or
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a># repeated describes a run nobody can reason about, whatever .status says.
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>def phase_order: [
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>  &quot;acquire working copy&quot;,
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>  &quot;preflight&quot;,
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>  &quot;composer install&quot;,
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>  &quot;baseline site install&quot;,
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>  &quot;update shared code&quot;,
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>  &quot;site update&quot;,
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>  &quot;render merge request&quot;,
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>  &quot;publish&quot;
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>];
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a># Addons that both report structured data and render a section into the merge
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a># request description, with the heading that section starts with.
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>#
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a># The two have to agree: an addon that told the report it did something while
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a># leaving the description silent about it produces a merge request whose
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a># reviewer is never told what changed. Only addons that render a section belong
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a># here -- code_beautifier, deprecations_remover and translations_updater report
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a># without contributing one, and are deliberately absent.
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>def addon_sections: {
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>  &quot;composer_audit&quot;:      &quot;## 🛡️ Security Report&quot;,
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>  &quot;composer_patches&quot;:    &quot;## 🩹 Patch updates&quot;,
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>  &quot;unsupported_modules&quot;: &quot;## ⚠️ Unsupported modules&quot;,
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>  &quot;update_hooks&quot;:        &quot;## 📄 Job Logs&quot;
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>};
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a># An advisory&#39;s identity, for comparing the fixed and remaining lists. Mirrors
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a># the key composer_audit itself uses: CVE first, then the advisory id, then the
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a># package and title for an advisory carrying neither.
+<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>def advisory_key: &quot;\(.cve // &quot;&quot;)|\(.advisoryId // &quot;&quot;)|\(.packageName // &quot;&quot;)|\(.title // &quot;&quot;)&quot;;
+<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>
+<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>def secrets: (env.DRUPDATER_ASSERT_SECRETS // &quot;&quot;) | split(&quot;\n&quot;) | map(select(length &gt; 0));
+<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>
+<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>. as $r
+<a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>| ($r.addons // {}) as $addons
+<a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>| ($r.phases // []) as $phases
+<a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>| ($r.packages // []) as $packages
+<a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>| ($r.merge_request_description // &quot;&quot;) as $description
+<a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>| [
+<a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>  # ---------------------------------------------------------------- $expect
+<a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>
+<a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>  ( if ($expect.status | index($r.status)) == null
+<a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>    then &quot;status: got \&quot;\($r.status)\&quot;, want one of \($expect.status | join(&quot;, &quot;))&quot;
+<a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>       + (if $r.failed_phase
+<a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a>          then &quot; (failed_phase=\($r.failed_phase): \($r.error // &quot;&quot;))&quot;
+<a id="__codelineno-3-79" name="__codelineno-3-79" href="#__codelineno-3-79"></a>          else &quot;&quot; end)
+<a id="__codelineno-3-80" name="__codelineno-3-80" href="#__codelineno-3-80"></a>    else empty end ),
+<a id="__codelineno-3-81" name="__codelineno-3-81" href="#__codelineno-3-81"></a>
+<a id="__codelineno-3-82" name="__codelineno-3-82" href="#__codelineno-3-82"></a>  ( if ($packages | length) &lt; ($expect.min_packages // 0)
+<a id="__codelineno-3-83" name="__codelineno-3-83" href="#__codelineno-3-83"></a>    then &quot;packages: got \($packages | length), want at least \($expect.min_packages)&quot;
+<a id="__codelineno-3-84" name="__codelineno-3-84" href="#__codelineno-3-84"></a>    else empty end ),
+<a id="__codelineno-3-85" name="__codelineno-3-85" href="#__codelineno-3-85"></a>
+<a id="__codelineno-3-86" name="__codelineno-3-86" href="#__codelineno-3-86"></a>  ( ($expect.phases // [])[]
+<a id="__codelineno-3-87" name="__codelineno-3-87" href="#__codelineno-3-87"></a>    | . as $name
+<a id="__codelineno-3-88" name="__codelineno-3-88" href="#__codelineno-3-88"></a>    | ($phases | map(select(.name == $name))) as $found
+<a id="__codelineno-3-89" name="__codelineno-3-89" href="#__codelineno-3-89"></a>    | if ($found | length) == 0 then &quot;phase missing: \($name)&quot;
+<a id="__codelineno-3-90" name="__codelineno-3-90" href="#__codelineno-3-90"></a>      elif ($found | map(select(.ok)) | length) == 0
+<a id="__codelineno-3-91" name="__codelineno-3-91" href="#__codelineno-3-91"></a>      then &quot;phase not ok: \($name) (\($found[0].error // &quot;no error recorded&quot;))&quot;
+<a id="__codelineno-3-92" name="__codelineno-3-92" href="#__codelineno-3-92"></a>      else empty end ),
+<a id="__codelineno-3-93" name="__codelineno-3-93" href="#__codelineno-3-93"></a>
+<a id="__codelineno-3-94" name="__codelineno-3-94" href="#__codelineno-3-94"></a>  # A fixture built to fail has to fail where it was built to fail. The invariant below only
+<a id="__codelineno-3-95" name="__codelineno-3-95" href="#__codelineno-3-95"></a>  # asks that failed_phase name *some* recorded failure, which a fixture that broke earlier
+<a id="__codelineno-3-96" name="__codelineno-3-96" href="#__codelineno-3-96"></a>  # than intended -- an unresolvable constraint tripping composer install rather than the
+<a id="__codelineno-3-97" name="__codelineno-3-97" href="#__codelineno-3-97"></a>  # update -- satisfies while testing nothing it was meant to.
+<a id="__codelineno-3-98" name="__codelineno-3-98" href="#__codelineno-3-98"></a>  ( if $expect.failed_phase and $r.failed_phase != $expect.failed_phase
+<a id="__codelineno-3-99" name="__codelineno-3-99" href="#__codelineno-3-99"></a>    then &quot;failed_phase: got \($r.failed_phase // &quot;none&quot;), want \($expect.failed_phase)&quot;
+<a id="__codelineno-3-100" name="__codelineno-3-100" href="#__codelineno-3-100"></a>    else empty end ),
+<a id="__codelineno-3-101" name="__codelineno-3-101" href="#__codelineno-3-101"></a>
+<a id="__codelineno-3-102" name="__codelineno-3-102" href="#__codelineno-3-102"></a>  ( ($expect.addons // [])[]
+<a id="__codelineno-3-103" name="__codelineno-3-103" href="#__codelineno-3-103"></a>    | . as $key
+<a id="__codelineno-3-104" name="__codelineno-3-104" href="#__codelineno-3-104"></a>    | if ($addons | has($key)) then empty
+<a id="__codelineno-3-105" name="__codelineno-3-105" href="#__codelineno-3-105"></a>      else &quot;addon reported nothing: \($key) -- present in report: &quot;
+<a id="__codelineno-3-106" name="__codelineno-3-106" href="#__codelineno-3-106"></a>         + (($addons | keys | join(&quot;, &quot;)) as $k
+<a id="__codelineno-3-107" name="__codelineno-3-107" href="#__codelineno-3-107"></a>            | if $k == &quot;&quot; then &quot;(none)&quot; else $k end)
+<a id="__codelineno-3-108" name="__codelineno-3-108" href="#__codelineno-3-108"></a>      end ),
+<a id="__codelineno-3-109" name="__codelineno-3-109" href="#__codelineno-3-109"></a>
+<a id="__codelineno-3-110" name="__codelineno-3-110" href="#__codelineno-3-110"></a>  # A fixture built around a particular package -- core held a minor behind,
+<a id="__codelineno-3-111" name="__codelineno-3-111" href="#__codelineno-3-111"></a>  # say -- only exercises what it is for if that package actually moved. A
+<a id="__codelineno-3-112" name="__codelineno-3-112" href="#__codelineno-3-112"></a>  # count alone is satisfied by any unrelated transitive bump.
+<a id="__codelineno-3-113" name="__codelineno-3-113" href="#__codelineno-3-113"></a>  ( ($expect.packages_match // [])[]
+<a id="__codelineno-3-114" name="__codelineno-3-114" href="#__codelineno-3-114"></a>    | . as $pattern
+<a id="__codelineno-3-115" name="__codelineno-3-115" href="#__codelineno-3-115"></a>    | if ($packages | map(select(.package | test($pattern))) | length) == 0
+<a id="__codelineno-3-116" name="__codelineno-3-116" href="#__codelineno-3-116"></a>      then &quot;packages: nothing matching /\($pattern)/ was updated&quot;
+<a id="__codelineno-3-117" name="__codelineno-3-117" href="#__codelineno-3-117"></a>      else empty end ),
+<a id="__codelineno-3-118" name="__codelineno-3-118" href="#__codelineno-3-118"></a>
+<a id="__codelineno-3-119" name="__codelineno-3-119" href="#__codelineno-3-119"></a>  ( ($expect.forbid_actions // [])[]
+<a id="__codelineno-3-120" name="__codelineno-3-120" href="#__codelineno-3-120"></a>    | . as $action
+<a id="__codelineno-3-121" name="__codelineno-3-121" href="#__codelineno-3-121"></a>    | ($packages | map(select(.action == $action)) | map(.package)) as $found
+<a id="__codelineno-3-122" name="__codelineno-3-122" href="#__codelineno-3-122"></a>    | if ($found | length) &gt; 0
+<a id="__codelineno-3-123" name="__codelineno-3-123" href="#__codelineno-3-123"></a>      then &quot;packages: \($action) is not expected here: \($found | join(&quot;, &quot;))&quot;
+<a id="__codelineno-3-124" name="__codelineno-3-124" href="#__codelineno-3-124"></a>      else empty end ),
+<a id="__codelineno-3-125" name="__codelineno-3-125" href="#__codelineno-3-125"></a>
+<a id="__codelineno-3-126" name="__codelineno-3-126" href="#__codelineno-3-126"></a>  # &quot;composer_audit reported something&quot; is satisfied by a run that closed no
+<a id="__codelineno-3-127" name="__codelineno-3-127" href="#__codelineno-3-127"></a>  # advisory at all and only listed the ones still open -- the one outcome a
+<a id="__codelineno-3-128" name="__codelineno-3-128" href="#__codelineno-3-128"></a>  # security run must not produce quietly.
+<a id="__codelineno-3-129" name="__codelineno-3-129" href="#__codelineno-3-129"></a>  ( (($addons.composer_audit.fixed) // []) as $fixed
+<a id="__codelineno-3-130" name="__codelineno-3-130" href="#__codelineno-3-130"></a>    | if $expect.audit_fixed_min and ($fixed | length) &lt; $expect.audit_fixed_min
+<a id="__codelineno-3-131" name="__codelineno-3-131" href="#__codelineno-3-131"></a>      then &quot;composer_audit: fixed \($fixed | length) advisories, want at least \($expect.audit_fixed_min)&quot;
+<a id="__codelineno-3-132" name="__codelineno-3-132" href="#__codelineno-3-132"></a>      else empty end ),
+<a id="__codelineno-3-133" name="__codelineno-3-133" href="#__codelineno-3-133"></a>
+<a id="__codelineno-3-134" name="__codelineno-3-134" href="#__codelineno-3-134"></a>  # ------------------------------------------------------------ invariants
+<a id="__codelineno-3-135" name="__codelineno-3-135" href="#__codelineno-3-135"></a>
+<a id="__codelineno-3-136" name="__codelineno-3-136" href="#__codelineno-3-136"></a>  ( if $r.schema_version != 1
+<a id="__codelineno-3-137" name="__codelineno-3-137" href="#__codelineno-3-137"></a>    then &quot;schema_version: got \($r.schema_version), want 1 -- the report contract changed&quot;
+<a id="__codelineno-3-138" name="__codelineno-3-138" href="#__codelineno-3-138"></a>    else empty end ),
+<a id="__codelineno-3-139" name="__codelineno-3-139" href="#__codelineno-3-139"></a>
+<a id="__codelineno-3-140" name="__codelineno-3-140" href="#__codelineno-3-140"></a>  # An empty composer_version means the lookup broke silently, leaving the next upstream
+<a id="__codelineno-3-141" name="__codelineno-3-141" href="#__codelineno-3-141"></a>  # composer regression unattributable -- which is the whole reason the field exists.
+<a id="__codelineno-3-142" name="__codelineno-3-142" href="#__codelineno-3-142"></a>  ( if (($r.composer_version // &quot;&quot;) | length) == 0
+<a id="__codelineno-3-143" name="__codelineno-3-143" href="#__codelineno-3-143"></a>    then &quot;composer_version: empty -- the version lookup failed or was dropped&quot;
+<a id="__codelineno-3-144" name="__codelineno-3-144" href="#__codelineno-3-144"></a>    else empty end ),
+<a id="__codelineno-3-145" name="__codelineno-3-145" href="#__codelineno-3-145"></a>
+<a id="__codelineno-3-146" name="__codelineno-3-146" href="#__codelineno-3-146"></a>  # Package changes: shape first, because a malformed entry makes every other
+<a id="__codelineno-3-147" name="__codelineno-3-147" href="#__codelineno-3-147"></a>  # statement about .packages meaningless.
+<a id="__codelineno-3-148" name="__codelineno-3-148" href="#__codelineno-3-148"></a>  ( $packages[]
+<a id="__codelineno-3-149" name="__codelineno-3-149" href="#__codelineno-3-149"></a>    | . as $p
+<a id="__codelineno-3-150" name="__codelineno-3-150" href="#__codelineno-3-150"></a>    | select(([&quot;Install&quot;, &quot;Upgrade&quot;, &quot;Downgrade&quot;, &quot;Remove&quot;] | index($p.action)) == null)
+<a id="__codelineno-3-151" name="__codelineno-3-151" href="#__codelineno-3-151"></a>    | &quot;packages: \($p.package // &quot;(unnamed)&quot;) has unknown action \&quot;\($p.action // &quot;&quot;)\&quot;&quot; ),
+<a id="__codelineno-3-152" name="__codelineno-3-152" href="#__codelineno-3-152"></a>
+<a id="__codelineno-3-153" name="__codelineno-3-153" href="#__codelineno-3-153"></a>  ( $packages[]
+<a id="__codelineno-3-154" name="__codelineno-3-154" href="#__codelineno-3-154"></a>    | select(.action == &quot;Upgrade&quot; or .action == &quot;Downgrade&quot;)
+<a id="__codelineno-3-155" name="__codelineno-3-155" href="#__codelineno-3-155"></a>    | select(((.from // &quot;&quot;) | length) == 0 or ((.to // &quot;&quot;) | length) == 0)
+<a id="__codelineno-3-156" name="__codelineno-3-156" href="#__codelineno-3-156"></a>    | &quot;packages: \(.package) is a \(.action) without both from and to&quot; ),
+<a id="__codelineno-3-157" name="__codelineno-3-157" href="#__codelineno-3-157"></a>
+<a id="__codelineno-3-158" name="__codelineno-3-158" href="#__codelineno-3-158"></a>  ( $packages[]
+<a id="__codelineno-3-159" name="__codelineno-3-159" href="#__codelineno-3-159"></a>    | select(.action == &quot;Install&quot;)
+<a id="__codelineno-3-160" name="__codelineno-3-160" href="#__codelineno-3-160"></a>    | select(((.to // &quot;&quot;) | length) == 0)
+<a id="__codelineno-3-161" name="__codelineno-3-161" href="#__codelineno-3-161"></a>    | &quot;packages: \(.package) was installed without a version&quot; ),
+<a id="__codelineno-3-162" name="__codelineno-3-162" href="#__codelineno-3-162"></a>
+<a id="__codelineno-3-163" name="__codelineno-3-163" href="#__codelineno-3-163"></a>  ( $packages[]
+<a id="__codelineno-3-164" name="__codelineno-3-164" href="#__codelineno-3-164"></a>    | select(.action == &quot;Remove&quot;)
+<a id="__codelineno-3-165" name="__codelineno-3-165" href="#__codelineno-3-165"></a>    | select(((.from // &quot;&quot;) | length) == 0)
+<a id="__codelineno-3-166" name="__codelineno-3-166" href="#__codelineno-3-166"></a>    | &quot;packages: \(.package) was removed without a version&quot; ),
+<a id="__codelineno-3-167" name="__codelineno-3-167" href="#__codelineno-3-167"></a>
+<a id="__codelineno-3-168" name="__codelineno-3-168" href="#__codelineno-3-168"></a>  # One composer update produces at most one operation per package, so a
+<a id="__codelineno-3-169" name="__codelineno-3-169" href="#__codelineno-3-169"></a>  # duplicate means the operations were parsed out of composer&#39;s output wrong.
+<a id="__codelineno-3-170" name="__codelineno-3-170" href="#__codelineno-3-170"></a>  ( $packages
+<a id="__codelineno-3-171" name="__codelineno-3-171" href="#__codelineno-3-171"></a>    | group_by(.package)
+<a id="__codelineno-3-172" name="__codelineno-3-172" href="#__codelineno-3-172"></a>    | map(select(length &gt; 1))[]
+<a id="__codelineno-3-173" name="__codelineno-3-173" href="#__codelineno-3-173"></a>    | &quot;packages: \(.[0].package) appears \(length) times&quot; ),
+<a id="__codelineno-3-174" name="__codelineno-3-174" href="#__codelineno-3-174"></a>
+<a id="__codelineno-3-175" name="__codelineno-3-175" href="#__codelineno-3-175"></a>  # Phases are recorded in the order they ran, once each.
+<a id="__codelineno-3-176" name="__codelineno-3-176" href="#__codelineno-3-176"></a>  ( $phases
+<a id="__codelineno-3-177" name="__codelineno-3-177" href="#__codelineno-3-177"></a>    | group_by(.name)
+<a id="__codelineno-3-178" name="__codelineno-3-178" href="#__codelineno-3-178"></a>    | map(select(length &gt; 1))[]
+<a id="__codelineno-3-179" name="__codelineno-3-179" href="#__codelineno-3-179"></a>    | &quot;phases: \(.[0].name) recorded \(length) times&quot; ),
+<a id="__codelineno-3-180" name="__codelineno-3-180" href="#__codelineno-3-180"></a>
+<a id="__codelineno-3-181" name="__codelineno-3-181" href="#__codelineno-3-181"></a>  ( $phases[]
+<a id="__codelineno-3-182" name="__codelineno-3-182" href="#__codelineno-3-182"></a>    | . as $phase
+<a id="__codelineno-3-183" name="__codelineno-3-183" href="#__codelineno-3-183"></a>    | select((phase_order | index($phase.name)) == null)
+<a id="__codelineno-3-184" name="__codelineno-3-184" href="#__codelineno-3-184"></a>    | &quot;phases: unknown phase \&quot;\($phase.name)\&quot; -- phase_order in this script is out of date&quot; ),
+<a id="__codelineno-3-185" name="__codelineno-3-185" href="#__codelineno-3-185"></a>
+<a id="__codelineno-3-186" name="__codelineno-3-186" href="#__codelineno-3-186"></a>  ( ($phases | map(. as $phase | phase_order | index($phase.name)) | map(select(. != null))) as $positions
+<a id="__codelineno-3-187" name="__codelineno-3-187" href="#__codelineno-3-187"></a>    | if ($positions | length) &gt; 1 and ($positions != ($positions | sort))
+<a id="__codelineno-3-188" name="__codelineno-3-188" href="#__codelineno-3-188"></a>      then &quot;phases: recorded out of order: \($phases | map(.name) | join(&quot; -&gt; &quot;))&quot;
+<a id="__codelineno-3-189" name="__codelineno-3-189" href="#__codelineno-3-189"></a>      else empty end ),
+<a id="__codelineno-3-190" name="__codelineno-3-190" href="#__codelineno-3-190"></a>
+<a id="__codelineno-3-191" name="__codelineno-3-191" href="#__codelineno-3-191"></a>  ( $phases[]
+<a id="__codelineno-3-192" name="__codelineno-3-192" href="#__codelineno-3-192"></a>    | select((.duration_seconds // 0) &lt; 0)
+<a id="__codelineno-3-193" name="__codelineno-3-193" href="#__codelineno-3-193"></a>    | &quot;phases: \(.name) has a negative duration&quot; ),
+<a id="__codelineno-3-194" name="__codelineno-3-194" href="#__codelineno-3-194"></a>
+<a id="__codelineno-3-195" name="__codelineno-3-195" href="#__codelineno-3-195"></a>  # A run cannot be shorter than the phases it is made of. One second of slack
+<a id="__codelineno-3-196" name="__codelineno-3-196" href="#__codelineno-3-196"></a>  # absorbs the rounding of eight independently measured durations.
+<a id="__codelineno-3-197" name="__codelineno-3-197" href="#__codelineno-3-197"></a>  ( ($phases | map(.duration_seconds // 0) | add // 0) as $sum
+<a id="__codelineno-3-198" name="__codelineno-3-198" href="#__codelineno-3-198"></a>    | if $sum &gt; (($r.duration_seconds // 0) + 1)
+<a id="__codelineno-3-199" name="__codelineno-3-199" href="#__codelineno-3-199"></a>      then &quot;duration: phases add up to \($sum)s but the run lasted \($r.duration_seconds)s&quot;
+<a id="__codelineno-3-200" name="__codelineno-3-200" href="#__codelineno-3-200"></a>      else empty end ),
+<a id="__codelineno-3-201" name="__codelineno-3-201" href="#__codelineno-3-201"></a>
+<a id="__codelineno-3-202" name="__codelineno-3-202" href="#__codelineno-3-202"></a>  # Status has to agree with the phases it summarises, in both directions.
+<a id="__codelineno-3-203" name="__codelineno-3-203" href="#__codelineno-3-203"></a>  ( if $r.status == &quot;success&quot;
+<a id="__codelineno-3-204" name="__codelineno-3-204" href="#__codelineno-3-204"></a>    then ( ($phases | map(select(.ok | not)) | map(.name)) as $failed
+<a id="__codelineno-3-205" name="__codelineno-3-205" href="#__codelineno-3-205"></a>           | if ($failed | length) &gt; 0
+<a id="__codelineno-3-206" name="__codelineno-3-206" href="#__codelineno-3-206"></a>             then &quot;status: success, but these phases are not ok: \($failed | join(&quot;, &quot;))&quot;
+<a id="__codelineno-3-207" name="__codelineno-3-207" href="#__codelineno-3-207"></a>             else empty end ),
+<a id="__codelineno-3-208" name="__codelineno-3-208" href="#__codelineno-3-208"></a>         ( if (($r.failed_phase // &quot;&quot;) | length) &gt; 0 or (($r.error // &quot;&quot;) | length) &gt; 0
+<a id="__codelineno-3-209" name="__codelineno-3-209" href="#__codelineno-3-209"></a>           then &quot;status: success, but failed_phase=\($r.failed_phase // &quot;&quot;) error=\($r.error // &quot;&quot;)&quot;
+<a id="__codelineno-3-210" name="__codelineno-3-210" href="#__codelineno-3-210"></a>           else empty end )
+<a id="__codelineno-3-211" name="__codelineno-3-211" href="#__codelineno-3-211"></a>    else empty end ),
+<a id="__codelineno-3-212" name="__codelineno-3-212" href="#__codelineno-3-212"></a>
+<a id="__codelineno-3-213" name="__codelineno-3-213" href="#__codelineno-3-213"></a>  ( if $r.status == &quot;failed&quot;
+<a id="__codelineno-3-214" name="__codelineno-3-214" href="#__codelineno-3-214"></a>    then ( if (($r.failed_phase // &quot;&quot;) | length) == 0
+<a id="__codelineno-3-215" name="__codelineno-3-215" href="#__codelineno-3-215"></a>           then &quot;status: failed, but no failed_phase is named&quot;
+<a id="__codelineno-3-216" name="__codelineno-3-216" href="#__codelineno-3-216"></a>           else ( ($phases | map(select(.name == $r.failed_phase and (.ok | not)))) as $found
+<a id="__codelineno-3-217" name="__codelineno-3-217" href="#__codelineno-3-217"></a>                  | if ($found | length) == 0
+<a id="__codelineno-3-218" name="__codelineno-3-218" href="#__codelineno-3-218"></a>                    then &quot;status: failed_phase=\($r.failed_phase) is not recorded as a failed phase&quot;
+<a id="__codelineno-3-219" name="__codelineno-3-219" href="#__codelineno-3-219"></a>                    else empty end )
+<a id="__codelineno-3-220" name="__codelineno-3-220" href="#__codelineno-3-220"></a>           end )
+<a id="__codelineno-3-221" name="__codelineno-3-221" href="#__codelineno-3-221"></a>    else empty end ),
+<a id="__codelineno-3-222" name="__codelineno-3-222" href="#__codelineno-3-222"></a>
+<a id="__codelineno-3-223" name="__codelineno-3-223" href="#__codelineno-3-223"></a>  ( if $r.status == &quot;no_changes&quot; and ($r.merge_request != null)
+<a id="__codelineno-3-224" name="__codelineno-3-224" href="#__codelineno-3-224"></a>    then &quot;status: no_changes, but a merge request was created (\($r.merge_request.url // &quot;&quot;))&quot;
+<a id="__codelineno-3-225" name="__codelineno-3-225" href="#__codelineno-3-225"></a>    else empty end ),
+<a id="__codelineno-3-226" name="__codelineno-3-226" href="#__codelineno-3-226"></a>
+<a id="__codelineno-3-227" name="__codelineno-3-227" href="#__codelineno-3-227"></a>  # A --dry-run does everything except publish. That it published anyway is the
+<a id="__codelineno-3-228" name="__codelineno-3-228" href="#__codelineno-3-228"></a>  # single worst thing this report could be hiding.
+<a id="__codelineno-3-229" name="__codelineno-3-229" href="#__codelineno-3-229"></a>  ( if $r.dry_run == true and ($r.merge_request != null)
+<a id="__codelineno-3-230" name="__codelineno-3-230" href="#__codelineno-3-230"></a>    then &quot;dry_run: a merge request was created anyway (\($r.merge_request.url // &quot;&quot;))&quot;
+<a id="__codelineno-3-231" name="__codelineno-3-231" href="#__codelineno-3-231"></a>    else empty end ),
+<a id="__codelineno-3-232" name="__codelineno-3-232" href="#__codelineno-3-232"></a>
+<a id="__codelineno-3-233" name="__codelineno-3-233" href="#__codelineno-3-233"></a>  ( if $r.merge_request != null and (($r.merge_request.url // &quot;&quot;) | length) == 0
+<a id="__codelineno-3-234" name="__codelineno-3-234" href="#__codelineno-3-234"></a>    then &quot;merge_request: recorded without a url&quot;
+<a id="__codelineno-3-235" name="__codelineno-3-235" href="#__codelineno-3-235"></a>    else empty end ),
+<a id="__codelineno-3-236" name="__codelineno-3-236" href="#__codelineno-3-236"></a>
+<a id="__codelineno-3-237" name="__codelineno-3-237" href="#__codelineno-3-237"></a>  # The branch is named as soon as the code update succeeds -- including under
+<a id="__codelineno-3-238" name="__codelineno-3-238" href="#__codelineno-3-238"></a>  # --dry-run, where it is the only handle on what the run produced.
+<a id="__codelineno-3-239" name="__codelineno-3-239" href="#__codelineno-3-239"></a>  ( if ($phases | map(select(.name == &quot;update shared code&quot; and .ok)) | length) &gt; 0
+<a id="__codelineno-3-240" name="__codelineno-3-240" href="#__codelineno-3-240"></a>      and (($r.update_branch // &quot;&quot;) | length) == 0
+<a id="__codelineno-3-241" name="__codelineno-3-241" href="#__codelineno-3-241"></a>    then &quot;update_branch: empty although the code update succeeded&quot;
+<a id="__codelineno-3-242" name="__codelineno-3-242" href="#__codelineno-3-242"></a>    else empty end ),
+<a id="__codelineno-3-243" name="__codelineno-3-243" href="#__codelineno-3-243"></a>
+<a id="__codelineno-3-244" name="__codelineno-3-244" href="#__codelineno-3-244"></a>  # Same for the merge request&#39;s title and description: rendering them is a
+<a id="__codelineno-3-245" name="__codelineno-3-245" href="#__codelineno-3-245"></a>  # phase of its own so that a dry run assembles them too.
+<a id="__codelineno-3-246" name="__codelineno-3-246" href="#__codelineno-3-246"></a>  ( if ($phases | map(select(.name == &quot;render merge request&quot; and .ok)) | length) &gt; 0
+<a id="__codelineno-3-247" name="__codelineno-3-247" href="#__codelineno-3-247"></a>    then ( if (($r.merge_request_title // &quot;&quot;) | length) == 0
+<a id="__codelineno-3-248" name="__codelineno-3-248" href="#__codelineno-3-248"></a>           then &quot;merge_request_title: empty although the merge request was rendered&quot;
+<a id="__codelineno-3-249" name="__codelineno-3-249" href="#__codelineno-3-249"></a>           else empty end ),
+<a id="__codelineno-3-250" name="__codelineno-3-250" href="#__codelineno-3-250"></a>         ( if ($description | length) == 0
+<a id="__codelineno-3-251" name="__codelineno-3-251" href="#__codelineno-3-251"></a>           then &quot;merge_request_description: empty although the merge request was rendered&quot;
+<a id="__codelineno-3-252" name="__codelineno-3-252" href="#__codelineno-3-252"></a>           else empty end )
+<a id="__codelineno-3-253" name="__codelineno-3-253" href="#__codelineno-3-253"></a>    else empty end ),
+<a id="__codelineno-3-254" name="__codelineno-3-254" href="#__codelineno-3-254"></a>
+<a id="__codelineno-3-255" name="__codelineno-3-255" href="#__codelineno-3-255"></a>  # What an addon reported and what the reviewer is told must be the same story.
+<a id="__codelineno-3-256" name="__codelineno-3-256" href="#__codelineno-3-256"></a>  ( addon_sections
+<a id="__codelineno-3-257" name="__codelineno-3-257" href="#__codelineno-3-257"></a>    | to_entries[]
+<a id="__codelineno-3-258" name="__codelineno-3-258" href="#__codelineno-3-258"></a>    | . as $section
+<a id="__codelineno-3-259" name="__codelineno-3-259" href="#__codelineno-3-259"></a>    | select(($addons | has($section.key)) and ($description | length) &gt; 0)
+<a id="__codelineno-3-260" name="__codelineno-3-260" href="#__codelineno-3-260"></a>    | select(($description | contains($section.value)) | not)
+<a id="__codelineno-3-261" name="__codelineno-3-261" href="#__codelineno-3-261"></a>    | &quot;merge_request_description: \($section.key) reported data but rendered no \&quot;\($section.value)\&quot; section&quot; ),
+<a id="__codelineno-3-262" name="__codelineno-3-262" href="#__codelineno-3-262"></a>
+<a id="__codelineno-3-263" name="__codelineno-3-263" href="#__codelineno-3-263"></a>  # Site-keyed addon sections can only be about sites the run was configured for.
+<a id="__codelineno-3-264" name="__codelineno-3-264" href="#__codelineno-3-264"></a>  ( [&quot;update_hooks&quot;, &quot;translations_updater&quot;][]
+<a id="__codelineno-3-265" name="__codelineno-3-265" href="#__codelineno-3-265"></a>    | . as $key
+<a id="__codelineno-3-266" name="__codelineno-3-266" href="#__codelineno-3-266"></a>    | ($addons[$key] // {})
+<a id="__codelineno-3-267" name="__codelineno-3-267" href="#__codelineno-3-267"></a>    | if type == &quot;object&quot;
+<a id="__codelineno-3-268" name="__codelineno-3-268" href="#__codelineno-3-268"></a>      then keys[]
+<a id="__codelineno-3-269" name="__codelineno-3-269" href="#__codelineno-3-269"></a>           | . as $site
+<a id="__codelineno-3-270" name="__codelineno-3-270" href="#__codelineno-3-270"></a>           | select((($r.sites // []) | index($site)) == null)
+<a id="__codelineno-3-271" name="__codelineno-3-271" href="#__codelineno-3-271"></a>           | &quot;\($key): reports site \&quot;\($site)\&quot;, which is not in .sites&quot;
+<a id="__codelineno-3-272" name="__codelineno-3-272" href="#__codelineno-3-272"></a>      else empty end ),
+<a id="__codelineno-3-273" name="__codelineno-3-273" href="#__codelineno-3-273"></a>
+<a id="__codelineno-3-274" name="__codelineno-3-274" href="#__codelineno-3-274"></a>  ( ($addons.unsupported_modules // [])[]
+<a id="__codelineno-3-275" name="__codelineno-3-275" href="#__codelineno-3-275"></a>    | select(((.name // &quot;&quot;) | length) == 0)
+<a id="__codelineno-3-276" name="__codelineno-3-276" href="#__codelineno-3-276"></a>    | &quot;unsupported_modules: an entry has no name&quot; ),
+<a id="__codelineno-3-277" name="__codelineno-3-277" href="#__codelineno-3-277"></a>
+<a id="__codelineno-3-278" name="__codelineno-3-278" href="#__codelineno-3-278"></a>  # An advisory cannot be both closed by this update and still open after it.
+<a id="__codelineno-3-279" name="__codelineno-3-279" href="#__codelineno-3-279"></a>  ( (($addons.composer_audit.fixed // []) | map(advisory_key)) as $fixed
+<a id="__codelineno-3-280" name="__codelineno-3-280" href="#__codelineno-3-280"></a>    | (($addons.composer_audit.remaining // []) | map(advisory_key)) as $remaining
+<a id="__codelineno-3-281" name="__codelineno-3-281" href="#__codelineno-3-281"></a>    | ($fixed - ($fixed - $remaining))[]
+<a id="__codelineno-3-282" name="__codelineno-3-282" href="#__codelineno-3-282"></a>    | &quot;composer_audit: advisory \(.) is reported as both fixed and remaining&quot; ),
+<a id="__codelineno-3-283" name="__codelineno-3-283" href="#__codelineno-3-283"></a>
+<a id="__codelineno-3-284" name="__codelineno-3-284" href="#__codelineno-3-284"></a>  # translations_updater exists to make &quot;ran and found nothing&quot; distinguishable
+<a id="__codelineno-3-285" name="__codelineno-3-285" href="#__codelineno-3-285"></a>  # from &quot;bailed out early&quot;, so every site it reports has to say which it was.
+<a id="__codelineno-3-286" name="__codelineno-3-286" href="#__codelineno-3-286"></a>  ( ($addons.translations_updater // {})
+<a id="__codelineno-3-287" name="__codelineno-3-287" href="#__codelineno-3-287"></a>    | to_entries[]
+<a id="__codelineno-3-288" name="__codelineno-3-288" href="#__codelineno-3-288"></a>    | select((.value.updated != true) and (((.value.skipped // &quot;&quot;) | length) == 0))
+<a id="__codelineno-3-289" name="__codelineno-3-289" href="#__codelineno-3-289"></a>    | &quot;translations_updater: site \(.key) neither updated nor gave a skip reason&quot; ),
+<a id="__codelineno-3-290" name="__codelineno-3-290" href="#__codelineno-3-290"></a>
+<a id="__codelineno-3-291" name="__codelineno-3-291" href="#__codelineno-3-291"></a>  # The report is archived and attached to tickets. A credential reaching it is
+<a id="__codelineno-3-292" name="__codelineno-3-292" href="#__codelineno-3-292"></a>  # a finding regardless of what else the run did right.
+<a id="__codelineno-3-293" name="__codelineno-3-293" href="#__codelineno-3-293"></a>  ( ($r | tojson) as $document
+<a id="__codelineno-3-294" name="__codelineno-3-294" href="#__codelineno-3-294"></a>    | secrets[]
+<a id="__codelineno-3-295" name="__codelineno-3-295" href="#__codelineno-3-295"></a>    | select(. as $secret | $document | contains($secret))
+<a id="__codelineno-3-296" name="__codelineno-3-296" href="#__codelineno-3-296"></a>    | &quot;credential: a secret from the environment appears in the report&quot; )
+<a id="__codelineno-3-297" name="__codelineno-3-297" href="#__codelineno-3-297"></a>]
+<a id="__codelineno-3-298" name="__codelineno-3-298" href="#__codelineno-3-298"></a>| if length == 0 then &quot;report assertions passed&quot;
+<a id="__codelineno-3-299" name="__codelineno-3-299" href="#__codelineno-3-299"></a>  else &quot;report assertions failed:\n  - &quot; + join(&quot;\n  - &quot;) | halt_error(1)
+<a id="__codelineno-3-300" name="__codelineno-3-300" href="#__codelineno-3-300"></a>  end
+</code></pre></div>
+<p>Use it like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">EXPECT</span><span class="o">=</span><span class="s1">&#39;{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s1">  &quot;status&quot;: [&quot;success&quot;, &quot;no_changes&quot;],</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s1">  &quot;phases&quot;: [&quot;composer install&quot;, &quot;baseline site install&quot;, &quot;update shared code&quot;],</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s1">  &quot;addons&quot;: [&quot;update_hooks&quot;, &quot;code_beautifier&quot;],</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s1">  &quot;packages_match&quot;: [&quot;^drupal/core&quot;],</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s1">  &quot;forbid_actions&quot;: [&quot;Downgrade&quot;],</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s1">  &quot;audit_fixed_min&quot;: 1</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s1">}&#39;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Optional: assert no credential reached the document</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DRUPDATER_ASSERT_SECRETS</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DRUPDATER_TOKEN</span><span class="s2">&quot;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>jq<span class="w"> </span>-e<span class="w"> </span>--argjson<span class="w"> </span>expect<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$EXPECT</span><span class="s2">&quot;</span><span class="w"> </span>-f<span class="w"> </span>.github/assert-report.jq<span class="w"> </span>report.json
+</code></pre></div>
+<p><code>packages_match</code> and <code>audit_fixed_min</code> are the two worth adding early. A package count
+alone is satisfied by any unrelated transitive bump, and "<code>composer_audit</code> reported
+something" is satisfied by a security run that closed no advisory at all and only listed
+the ones still open.</p>
+<p>On failure it prints every problem at once and exits non-zero:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>report assertions failed:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  - phase not ok: site update (drush command failed)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  - addon reported nothing: translations_updater -- present in report: update_hooks, composer_diff
+</code></pre></div>
+<h3 id="choosing-what-to-expect">Choosing what to expect<a class="headerlink" href="#choosing-what-to-expect" title="Permanent link">&para;</a></h3>
+<p>Expect the addons you have actually enabled in
+<a href="../../reference/configuration/"><code>.drupdater.yaml</code></a>, and remember that a normal run and a
+security run produce different sets. Drupdater's own fixtures split them:</p>
+<table>
+<thead>
+<tr>
+<th>Run type</th>
+<th>Addons expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>normal</code></td>
+<td><code>update_hooks</code>, <code>unsupported_modules</code>, <code>composer_audit</code>, <code>code_beautifier</code>, <code>deprecations_remover</code>, <code>translations_updater</code></td>
+</tr>
+<tr>
+<td><code>security</code></td>
+<td><code>composer_audit</code>, <code>unsupported_modules</code>, <code>update_hooks</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>composer_audit</code> and <code>unsupported_modules</code> appear in both because both addons run on every
+update. Each is still omitted when it has nothing to say — <code>composer_audit</code> when the run
+found no advisories at all, <code>unsupported_modules</code> when every installed module is supported —
+so expect them only for a project where you know there is something to find.</p>
+<p>Note that <a href="../../reference/addons/composer-diff/"><code>composer_diff</code></a> and
+<a href="../../reference/addons/composer-normalizer/"><code>composer_normalizer</code></a> never appear in the
+report at all — do not assert on them.</p>
+<h3 id="cross-check-the-report-against-composerlock">Cross-check the report against <code>composer.lock</code><a class="headerlink" href="#cross-check-the-report-against-composerlock" title="Permanent link">&para;</a></h3>
+<p><code>packages</code> is parsed out of composer's console output, not read back from the lock. If you
+want a second opinion that does not share that assumption, diff the lock the run committed
+against the one it started from and compare:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>show<span class="w"> </span><span class="s2">&quot;origin/main:composer.lock&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/base-composer.lock
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>jq<span class="w"> </span>-n<span class="w"> </span>-e<span class="w"> </span>-r<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>--slurpfile<span class="w"> </span>before<span class="w"> </span>/tmp/base-composer.lock<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span>--slurpfile<span class="w"> </span>after<span class="w"> </span>composer.lock<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span>--slurpfile<span class="w"> </span>report<span class="w"> </span>report.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span>-f<span class="w"> </span>.github/assert-lock-matches-report.jq
+</code></pre></div>
+<p>It fails in both directions: a lock change the report does not mention, and a reported
+change the lock does not show — the second being the one a reviewer would act on.</p>
+<div class="highlight"><span class="filename">.github/assert-lock-matches-report.jq</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># Verifies a drupdater run report&#39;s package list against the composer.lock it produced.
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>#
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>#   jq -n -e -r --slurpfile before old-composer.lock \
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>#                --slurpfile after  composer.lock \
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>#                --slurpfile report report.json \
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>#                -f .github/assert-lock-matches-report.jq
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>#
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a># The report&#39;s &quot;packages&quot; field is parsed out of composer&#39;s console output, not
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a># read back from the lock, so everything downstream of it -- the dependency
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a># table in the merge request, a fleet-wide view of what moved, this repository&#39;s
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a># own integration assertions -- trusts a regular expression over human-readable
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a># text. That regex has to keep up with composer&#39;s output, and nothing in the
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a># unit tests would notice if it stopped doing so: they feed it the output it was
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a># written against.
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>#
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a># Diffing the two lock files is the independent second opinion. It is derived
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a># from the artefact the run actually committed, so a report that says a package
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a># moved when the lock disagrees -- or stays silent about one that did -- fails
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a># here rather than being believed.
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a># name -&gt; version, across both sections. require-dev packages are updated by the
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a># same composer update and are as much a part of the diff as the rest.
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>def packages_map:
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>  (((.packages // []) + (.&quot;packages-dev&quot; // []))
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>   | map({key: .name, value: (.version // &quot;&quot;)})
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>   | from_entries);
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a># The report&#39;s action vocabulary, reduced to what a lock diff can actually
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a># distinguish. Upgrade and Downgrade are one case here: telling them apart needs
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a># a semantic version comparison, which jq has no business doing -- the direction
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a># is composer&#39;s own statement and there is nothing in the lock to check it
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a># against.
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>def category: if . == &quot;Upgrade&quot; or . == &quot;Downgrade&quot; then &quot;change&quot; else ascii_downcase end;
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>($before[0] | packages_map) as $was
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>| ($after[0] | packages_map) as $now
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>| ($report[0].packages // []) as $reported
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>| ($reported | map({key: .package, value: .}) | from_entries) as $by_name
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>| ( [ ($now | keys_unsorted[] | . as $name
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>       | select(($was | has($name)) | not)
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a>       | {package: $name, category: &quot;install&quot;, to: $now[$name]}),
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>      ($was | keys_unsorted[] | . as $name
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>       | select(($now | has($name)) | not)
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a>       | {package: $name, category: &quot;remove&quot;, from: $was[$name]}),
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a>      ($now | keys_unsorted[] | . as $name
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>       | select(($was | has($name)) and ($was[$name] != $now[$name]))
+<a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>       | {package: $name, category: &quot;change&quot;, from: $was[$name], to: $now[$name]})
+<a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>    ] ) as $expected
+<a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>| ( $expected | map({key: .package, value: .}) | from_entries ) as $expected_by_name
+<a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>| [
+<a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a>  # Every lock change has to appear in the report, with the same shape.
+<a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>  ( $expected[]
+<a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a>    | . as $want
+<a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a>    | ($by_name[$want.package] // null) as $got
+<a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a>    | if $got == null
+<a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a>      then &quot;composer.lock changed \($want.package) (\($want.category)) but the report does not mention it&quot;
+<a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a>      elif ($got.action | category) != $want.category
+<a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a>      then &quot;\($want.package): composer.lock shows a \($want.category), the report says \($got.action)&quot;
+<a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a>      elif ($want.from != null) and (($got.from // &quot;&quot;) != $want.from)
+<a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a>      then &quot;\($want.package): composer.lock has it going from \($want.from), the report says \($got.from // &quot;&quot;)&quot;
+<a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a>      elif ($want.to != null) and (($got.to // &quot;&quot;) != $want.to)
+<a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a>      then &quot;\($want.package): composer.lock has it going to \($want.to), the report says \($got.to // &quot;&quot;)&quot;
+<a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a>      else empty end ),
+<a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a>
+<a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a>  # ... and nothing may be reported that the lock does not show. A report
+<a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a>  # claiming an update that never landed is the more dangerous direction: it is
+<a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a>  # the one a reviewer would act on.
+<a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a>  ( $reported[]
+<a id="__codelineno-7-69" name="__codelineno-7-69" href="#__codelineno-7-69"></a>    | . as $got
+<a id="__codelineno-7-70" name="__codelineno-7-70" href="#__codelineno-7-70"></a>    | select(($expected_by_name | has($got.package)) | not)
+<a id="__codelineno-7-71" name="__codelineno-7-71" href="#__codelineno-7-71"></a>    | &quot;\($got.package): the report claims a \($got.action) that composer.lock does not show&quot; ),
+<a id="__codelineno-7-72" name="__codelineno-7-72" href="#__codelineno-7-72"></a>
+<a id="__codelineno-7-73" name="__codelineno-7-73" href="#__codelineno-7-73"></a>  # A run that updated nothing has no business reporting packages, and one that
+<a id="__codelineno-7-74" name="__codelineno-7-74" href="#__codelineno-7-74"></a>  # changed the lock has no business reporting none.
+<a id="__codelineno-7-75" name="__codelineno-7-75" href="#__codelineno-7-75"></a>  ( if ($expected | length) == 0 and ($reported | length) &gt; 0
+<a id="__codelineno-7-76" name="__codelineno-7-76" href="#__codelineno-7-76"></a>    then &quot;composer.lock is unchanged, but the report lists \($reported | length) package changes&quot;
+<a id="__codelineno-7-77" name="__codelineno-7-77" href="#__codelineno-7-77"></a>    elif ($expected | length) &gt; 0 and ($reported | length) == 0
+<a id="__codelineno-7-78" name="__codelineno-7-78" href="#__codelineno-7-78"></a>    then &quot;composer.lock changed \($expected | length) packages, but the report lists none&quot;
+<a id="__codelineno-7-79" name="__codelineno-7-79" href="#__codelineno-7-79"></a>    else empty end )
+<a id="__codelineno-7-80" name="__codelineno-7-80" href="#__codelineno-7-80"></a>]
+<a id="__codelineno-7-81" name="__codelineno-7-81" href="#__codelineno-7-81"></a>| if length == 0
+<a id="__codelineno-7-82" name="__codelineno-7-82" href="#__codelineno-7-82"></a>  then &quot;composer.lock matches the report (\($expected | length) package changes)&quot;
+<a id="__codelineno-7-83" name="__codelineno-7-83" href="#__codelineno-7-83"></a>  else &quot;composer.lock does not match the report:\n  - &quot; + join(&quot;\n  - &quot;) | halt_error(1)
+<a id="__codelineno-7-84" name="__codelineno-7-84" href="#__codelineno-7-84"></a>  end
+</code></pre></div>
+<h2 id="collect-the-report-as-a-ci-artifact">Collect the report as a CI artifact<a class="headerlink" href="#collect-the-report-as-a-ci-artifact" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GitHub Actions</label><label for="__tabbed_1_2">GitLab CI</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/drupdater/bin &quot;${{ secrets.DRUPDATER_TOKEN }}&quot; --report ./report.json</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drupdater-report</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./report.json</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/drupdater/bin --report ./drupdater-report.json</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">drupdater-report.json</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><code>if: always()</code> / <code>when: always</code> is the important part. The report is written on failures
+too, and a failed run is when you most want it.</p>
+<h2 id="track-runs-over-time">Track runs over time<a class="headerlink" href="#track-runs-over-time" title="Permanent link">&para;</a></h2>
+<p>Because reports are stable — addons sort their output so two runs over unchanged input
+produce byte-identical sections — they diff cleanly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>diff<span class="w"> </span>&lt;<span class="o">(</span>jq<span class="w"> </span>-S<span class="w"> </span><span class="s1">&#39;.addons.unsupported_modules&#39;</span><span class="w"> </span>old.json<span class="o">)</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">     </span>&lt;<span class="o">(</span>jq<span class="w"> </span>-S<span class="w"> </span><span class="s1">&#39;.addons.unsupported_modules&#39;</span><span class="w"> </span>new.json<span class="o">)</span>
+</code></pre></div>
+<p>Phase durations make the cost of a run measurable without separate instrumentation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;[.started_at, .duration_seconds, .status] | @tsv&#39;</span><span class="w"> </span>report.json<span class="w"> </span>&gt;&gt;<span class="w"> </span>history.tsv
+</code></pre></div>
+<h2 id="schema-compatibility">Schema compatibility<a class="headerlink" href="#schema-compatibility" title="Permanent link">&para;</a></h2>
+<p>Check <code>schema_version</code> and <strong>ignore fields you do not recognise</strong>. New fields are added
+without bumping the version; only a removal or rename increments it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>jq<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.schema_version == 1&#39;</span><span class="w"> </span>report.json<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;report contract changed — review the consumer&quot;</span>
+</code></pre></div>
+<h2 id="credentials">Credentials<a class="headerlink" href="#credentials" title="Permanent link">&para;</a></h2>
+<p>Reports are safe to archive and to attach to a ticket. The repository URL is stripped of
+embedded credentials, and the whole serialised document passes through the same redactor
+as the logs. See <a href="../../explanation/credentials-and-redaction/">Credentials and
+redaction</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../enable-auto-merge/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Enable auto-merge">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Enable auto-merge
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../migrate-config-layout/" class="md-footer__link md-footer__link--next" aria-label="Next: Migrate the config layout">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Migrate the config layout
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Licensed under the Apache License 2.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/drupdater/drupdater" target="_blank" rel="noopener" title="Drupdater on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

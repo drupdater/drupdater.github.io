@@ -1,0 +1,3872 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Automated, reviewable Drupal updates — as a pull or merge request, on every schedule.">
+      
+      
+        <meta name="author" content="Drupdater contributors">
+      
+      
+        <link rel="canonical" href="https://drupdater.github.io/contributing/development/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../writing-an-addon/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Development setup - Drupdater</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+    <script data-goatcounter="https://drupdater.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#development-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Drupdater" class="md-header__button md-logo" aria-label="Drupdater" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Drupdater
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Development setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/drupdater/drupdater" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    drupdater/drupdater
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../how-to/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  How-to guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../explanation/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Explanation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Drupdater" class="md-nav__button md-logo" aria-label="Drupdater" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Drupdater
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/drupdater/drupdater" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    drupdater/drupdater
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/first-run/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your first run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/scheduled-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scheduled updates in CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../how-to/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-to guides
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-to guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/github-actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run in GitHub Actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/gitlab-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run in GitLab CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/run-preflight-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run preflight checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/update-multiple-sites/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update multiple sites
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/use-private-packagist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use a private Composer registry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/enable-patch-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable patch management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/enable-auto-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable auto-merge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/consume-the-run-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consume the run report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/migrate-config-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrate the config layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/troubleshoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshoot a run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/cli/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Command line
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/drupdater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    drupdater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    drupdater check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/addons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    drupdater addons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/environment-variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/addons/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Addons
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Addons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-allow-plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_allow_plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-patches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_patches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-diff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_diff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/update-hooks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    update_hooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_audit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/code-beautifier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    code_beautifier
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/deprecations-remover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    deprecations_remover
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/translations-updater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    translations_updater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/composer-normalizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    composer_normalizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/addons/unsupported-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    unsupported_modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/run-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/preflight-checks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preflight checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/docker-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../explanation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Explanation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/how-a-run-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How a run works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/addon-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The addon architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/configuration-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The configuration model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/why-a-run-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why a run report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/credentials-and-redaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credentials and redaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/vcs-provider-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VCS provider detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/non-goals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What Drupdater does not do
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development setup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Make targets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-it-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running it locally
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running it locally">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-outside-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running outside the image
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enforced-on-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enforced on commit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enforced on commit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#golden-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Golden files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Golden files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-report-has-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the report has one
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-not-to-write-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When not to write one
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-race-detector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The race detector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The race detector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-detector-only-sees-what-actually-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The detector only sees what actually runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutation-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mutation testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mutation testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-survivors-kept-turning-out-to-be" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the survivors kept turning out to be
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-a-mutant-is-a-false-positive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When a mutant is a false positive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#property-based-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property-based testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Property-based testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducing-a-failure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing a failure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties-and-the-mutation-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties and the mutation gate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-not-to-write-one_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When not to write one
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuzzing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fuzzing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The targets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-convention_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-a-target-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When a target fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-ci_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration tests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The fixtures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-each-leg-asserts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each leg asserts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mocks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker image
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devcontainer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../writing-an-addon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing an addon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Make targets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-it-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running it locally
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running it locally">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-outside-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running outside the image
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enforced-on-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enforced on commit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enforced on commit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#golden-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Golden files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Golden files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-report-has-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the report has one
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-not-to-write-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When not to write one
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-race-detector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The race detector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The race detector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-detector-only-sees-what-actually-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The detector only sees what actually runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutation-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mutation testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mutation testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-survivors-kept-turning-out-to-be" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the survivors kept turning out to be
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-a-mutant-is-a-false-positive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When a mutant is a false positive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#property-based-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property-based testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Property-based testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducing-a-failure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing a failure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties-and-the-mutation-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties and the mutation gate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-not-to-write-one_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When not to write one
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuzzing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fuzzing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The targets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-convention_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-a-target-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When a target fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-ci_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration tests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The fixtures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-each-leg-asserts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each leg asserts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mocks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker image
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devcontainer
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/drupdater/drupdater/edit/main/docs/contributing/development.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="development-setup">Development setup<a class="headerlink" href="#development-setup" title="Permanent link">&para;</a></h1>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Go 1.26.4+</strong> — the version in <code>go.mod</code>.</li>
+<li><strong><code>make</code></strong>.</li>
+<li><strong>Docker</strong> — for <code>make mock</code>, the hadolint half of <code>make lint</code>, and building images.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/drupdater/drupdater.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>drupdater
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>make<span class="w"> </span>build
+</code></pre></div>
+<h2 id="make-targets">Make targets<a class="headerlink" href="#make-targets" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>make<span class="w"> </span>build<span class="w">          </span><span class="c1"># build the binary (injects the version via -ldflags)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>make<span class="w"> </span><span class="nb">test</span><span class="w">           </span><span class="c1"># go test -v ./...</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>make<span class="w"> </span>test-race<span class="w">      </span><span class="c1"># the suite under the race detector</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>make<span class="w"> </span>test-property<span class="w">  </span><span class="c1"># only the property tests, with far more generated cases</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>make<span class="w"> </span>fuzz<span class="w">           </span><span class="c1"># fuzz every target (FUZZTIME=30s each by default)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>make<span class="w"> </span>mutate<span class="w">         </span><span class="c1"># mutation testing over the whole module (mutago)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>make<span class="w"> </span>lint<span class="w">           </span><span class="c1"># golangci-lint + hadolint on the Dockerfile</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>make<span class="w"> </span>fmt<span class="w">            </span><span class="c1"># go fmt ./...</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>make<span class="w"> </span>fix<span class="w">            </span><span class="c1"># go fix ./... (interface{} → any, strings.Cut, …)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>make<span class="w"> </span>mock<span class="w">           </span><span class="c1"># regenerate mocks (mockery v3, via Docker)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>make<span class="w"> </span>deadcode<span class="w">       </span><span class="c1"># find unreachable functions</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>make<span class="w"> </span>update<span class="w">         </span><span class="c1"># go get -u ./... &amp;&amp; go mod tidy</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>make<span class="w"> </span>docker-build<span class="w">   </span><span class="c1"># build the multi-stage image locally</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>make<span class="w"> </span>docs-serve<span class="w">     </span><span class="c1"># preview this documentation at :8000</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>make<span class="w"> </span>docs-build<span class="w">     </span><span class="c1"># build the documentation with --strict</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>make<span class="w"> </span><span class="nb">help</span><span class="w">           </span><span class="c1"># list every target</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Analytics only exists on the published site</p>
+<p>The GoatCounter script in <code>overrides/main.html</code> is emitted only when
+<code>DRUPDATER_GOATCOUNTER</code> is set, which happens in <code>.github/workflows/docs.yml</code> and
+nowhere else. A local preview or build produces pages with no tracking script.</p>
+</div>
+<p>Run a single test:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-v<span class="w"> </span>-run<span class="w"> </span>TestName<span class="w"> </span>./path/to/package/...
+</code></pre></div>
+<h2 id="running-it-locally">Running it locally<a class="headerlink" href="#running-it-locally" title="Permanent link">&para;</a></h2>
+<p>Both of these use <code>--clone</code>, so they never touch a real checkout:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>run<span class="w"> </span><span class="nv">REPO</span><span class="o">=</span>&lt;repository-url&gt;<span class="w"> </span><span class="nv">TOKEN</span><span class="o">=</span>&lt;token&gt;<span class="w">           </span><span class="c1"># go run</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>make<span class="w"> </span>docker-run<span class="w"> </span><span class="nv">REPO</span><span class="o">=</span>&lt;repository-url&gt;<span class="w"> </span><span class="nv">TOKEN</span><span class="o">=</span>&lt;token&gt;<span class="w">    </span><span class="c1"># built image</span>
+</code></pre></div>
+<p>Add flags with <code>OPTIONS</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>make<span class="w"> </span>run<span class="w"> </span><span class="nv">REPO</span><span class="o">=</span>&lt;repository-url&gt;<span class="w"> </span><span class="nv">TOKEN</span><span class="o">=</span>&lt;token&gt;<span class="w"> </span><span class="nv">OPTIONS</span><span class="o">=</span><span class="s2">&quot;--dry-run --verbose&quot;</span>
+</code></pre></div>
+<p>For a run that touches nothing remote at all, use checkout mode against a local clone —
+no token needed:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>go<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--working-dir<span class="w"> </span>/path/to/a/drupal/checkout<span class="w"> </span>--dry-run<span class="w"> </span>--verbose
+</code></pre></div>
+<h3 id="running-outside-the-image">Running outside the image<a class="headerlink" href="#running-outside-the-image" title="Permanent link">&para;</a></h3>
+<p><code>make build</code>, <code>go run</code>, and a binary a CI job downloaded all invoke whatever <code>composer</code>,
+<code>php</code> and <code>git</code> are on <code>PATH</code>, against whatever Composer configuration your environment
+provides. That is supported: the two Composer settings the tool's own correctness depends
+on (<code>COMPOSER_PROCESS_TIMEOUT</code>, <code>COMPOSER_NO_AUDIT</code>) are forced by <code>composer.Env</code> on every
+invocation rather than inherited from the image — including the <code>composer exec</code> calls that
+<code>pkg/drush</code>, <code>pkg/phpcs</code> and <code>pkg/rector</code> make. The image's remaining Composer variables
+are deployment policy and need no local equivalent — see <a href="../../reference/environment-variables/#set-by-drupdater">environment
+variables</a>.</p>
+<p>What the image does give you is a known-good PHP with the required extensions and the
+helper plugins installed globally. If a run fails locally in a way it does not in CI,
+check that first.</p>
+<h2 id="enforced-on-commit">Enforced on commit<a class="headerlink" href="#enforced-on-commit" title="Permanent link">&para;</a></h2>
+<p>A pre-commit hook runs two gates. Read its output rather than assuming it passed.</p>
+<h3 id="lint">Lint<a class="headerlink" href="#lint" title="Permanent link">&para;</a></h3>
+<p><code>make lint</code> must report zero issues. Do not disable a linter or relax <code>.golangci.yml</code> to
+get past it — fix the code.</p>
+<div class="admonition note">
+<p class="admonition-title">If <code>golangci-lint</code> refuses to run</p>
+<p>A <code>golangci-lint</code> built with an older Go than this module targets will refuse:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>can&#39;t load config: the Go language version (go1.24) used to build golangci-lint
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>is lower than the targeted Go version (1.26.4)
+</code></pre></div>
+<p>Build the CI-pinned version with the module's toolchain, once per session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">GOTOOLCHAIN</span><span class="o">=</span>go1.26.4<span class="w"> </span>go<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.12.2
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cp<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>go<span class="w"> </span>env<span class="w"> </span>GOPATH<span class="k">)</span><span class="s2">/bin/golangci-lint&quot;</span><span class="w"> </span>/usr/local/bin/golangci-lint
+</code></pre></div>
+<p>Take the version from <code>.github/workflows/go.yml</code> and the toolchain from <code>go.mod</code> if
+they have drifted.</p>
+<p><code>make lint</code> also runs hadolint via Docker, which needs a running daemon. If that
+cannot start, run <code>golangci-lint run ./...</code> directly — it is the part that gates code
+changes.</p>
+</div>
+<h3 id="coverage">Coverage<a class="headerlink" href="#coverage" title="Permanent link">&para;</a></h3>
+<p>Changed packages must reach <strong>≥ 90%</strong> coverage. The hook prints per-package totals; add
+tests before committing if any package is below.</p>
+<h2 id="golden-files">Golden files<a class="headerlink" href="#golden-files" title="Permanent link">&para;</a></h2>
+<p>Some output is a contract with somebody outside this repository: the merge request sections a
+reviewer reads, and the <code>--report</code> document automation parses. For those, the whole shape matters
+— a renamed field breaks a consumer, and no assertion anybody remembers to write covers every
+field. So the expected output lives in a file under <code>testdata/</code> and the test compares against it
+byte for byte.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./...<span class="w">                       </span><span class="c1"># compare</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./...<span class="w"> </span>-update<span class="w">               </span><span class="c1"># rewrite every golden file</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./internal/addon<span class="w"> </span>-update<span class="w">    </span><span class="c1"># just one package&#39;s</span>
+</code></pre></div>
+<p><code>-update</code> is registered by <code>internal/golden</code>, which every golden assertion goes through. Always
+read the resulting <code>git diff</code> before committing: <code>-update</code> makes a change invisible if you let it,
+which is the one way a golden file can make tests worse rather than better.</p>
+<table>
+<thead>
+<tr>
+<th>Golden file</th>
+<th>Pins</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>internal/addon/testdata/*.md</code></td>
+<td>Each addon's merge request section, from its template</td>
+</tr>
+<tr>
+<td><code>internal/services/testdata/dependency_update.md</code></td>
+<td>The assembled description a full run produces</td>
+</tr>
+<tr>
+<td><code>internal/addon/testdata/run_report.json</code></td>
+<td>The whole <code>--report</code> document, every reporting addon at once</td>
+</tr>
+</tbody>
+</table>
+<p>Most of these are embedded into this documentation with <code>pymdownx.snippets</code>, so the published
+examples cannot drift from what the code emits. Changing a golden file changes the docs.</p>
+<h3 id="why-the-report-has-one">Why the report has one<a class="headerlink" href="#why-the-report-has-one" title="Permanent link">&para;</a></h3>
+<p><code>internal/addon/report.go</code> and <code>internal/report/report.go</code> are a published schema, and struct tags
+are invisible to everything else: coverage sees a line that ran, mutation testing does not mutate
+tags, and the property tests assert values rather than names. Before <code>run_report.json</code> existed,
+renaming <code>fixable</code> to <code>fixable_count</code> and <code>remaining</code> to <code>still_open</code> broke <strong>no test at all</strong>.
+<code>.github/assert-report.jq</code> does check field names, but only in the label-triggered integration
+run — never on a pull request.</p>
+<p>The golden is built through the real <code>report.Recorder</code>, so it also pins how <code>AddAddons</code> keys each
+section. Everything a clock produced is overwritten with fixed values first — otherwise the file
+would differ on every run — which is the one thing the golden deliberately does not check.</p>
+<h3 id="when-not-to-write-one">When not to write one<a class="headerlink" href="#when-not-to-write-one" title="Permanent link">&para;</a></h3>
+<p>A golden file freezes <em>everything</em> about its subject, so on an internal value it turns every
+unrelated change into a diff to re-approve and says nothing about which part mattered. The
+composer diff table and the preflight results are better served by the assertions they already
+have, which name the thing under test. Reach for a golden when the output is a published
+contract, not when it is merely large.</p>
+<h2 id="the-race-detector">The race detector<a class="headerlink" href="#the-race-detector" title="Permanent link">&para;</a></h2>
+<p>Drupdater runs the per-site phases concurrently — an <code>errgroup</code> bounded by <code>--concurrency</code>, one
+goroutine per site — and several addons accumulate state across those goroutines. That state is
+mutex-guarded, and nothing else in the toolchain can tell you when it stops being: coverage
+proves a line ran, mutation testing proves a test would notice a <em>changed</em> line, and both are
+blind to two goroutines touching the same map.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>make<span class="w"> </span>test-race
+</code></pre></div>
+<p>CI runs it as its own <code>race</code> job in <code>go.yml</code>, in parallel with <code>test</code> so the coverage profile
+still comes from an uninstrumented run.</p>
+<div class="admonition note">
+<p class="admonition-title">It takes about a minute, not a couple of seconds</p>
+<p><code>pkg/composer</code> and <code>pkg/drush</code> fake subprocesses with the <code>TestHelperProcess</code> pattern, which
+re-executes the test binary once per faked command. Under <code>-race</code> every one of those execs
+starts an instrumented process, so those two packages account for almost all of the runtime.
+Nothing is wrong; they simply have no concurrency for the detector to find either.</p>
+</div>
+<h3 id="the-detector-only-sees-what-actually-runs">The detector only sees what actually runs<a class="headerlink" href="#the-detector-only-sees-what-actually-runs" title="Permanent link">&para;</a></h3>
+<p>This is the part worth internalising. <code>-race</code> is not a static check — it observes real memory
+accesses, so it finds nothing in code no test drives concurrently. Every <code>StartUpdate</code> test used
+to run a single site, which walks the per-site phases on one goroutine: the addon maps were
+written by one writer, and removing their mutexes would have gone unnoticed.</p>
+<p>So the concurrency tests and the detector are one tool, not two:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Drives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TestStartUpdateWithConcurrentSites</code></td>
+<td>The real workflow with four sites, asserting the baseline installs overlap and the committing tail does not</td>
+</tr>
+<tr>
+<td><code>internal/addon/concurrency_test.go</code></td>
+<td>Each mutex-guarded addon's per-site handler, fired from all sites at once</td>
+</tr>
+<tr>
+<td><code>TestForEachSite</code></td>
+<td>The fan-out itself: the concurrency bound, and cancellation on first error</td>
+</tr>
+</tbody>
+</table>
+<p>Deleting a mutex from <code>internal/addon</code> makes the matching test fail under <code>-race</code> and <strong>pass
+without it</strong>. When you add state that accumulates across sites, add it to
+<code>concurrency_test.go</code> — otherwise the guard around it is untested however green CI looks.</p>
+<p>Where the shared resource is not memory, the detector cannot help and the test has to assert
+directly. <code>siteCommitMu</code> serialises the tail of <code>updateSite</code> because the sites share one git
+index — which is mocked in the suite, so there is no shared memory to observe.
+<code>TestStartUpdateWithConcurrentSites</code> measures peak occupancy instead.</p>
+<h2 id="mutation-testing">Mutation testing<a class="headerlink" href="#mutation-testing" title="Permanent link">&para;</a></h2>
+<p>Coverage proves a line <em>ran</em>. It does not prove a test <em>fails</em> when that line is wrong — a
+test that exercises a function without asserting anything scores the same as one that checks
+every branch. Mutation testing closes that gap: it rewrites the source in small ways (<code>==</code> →
+<code>!=</code>, <code>&amp;&amp;</code> → <code>||</code>, dropping a <code>defer</code>, zeroing a return value) and reports every mutant the
+suite fails to notice. A surviving mutant is a behaviour change no test objects to.</p>
+<p>The tool is <a href="https://github.com/quality-gates/mutago">mutago</a>, pinned as a <code>tool</code> directive in
+<code>go.mod</code> and configured in <code>mutago.yaml</code>. Run it over the whole module:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>make<span class="w"> </span>mutate
+</code></pre></div>
+<p>That takes 25–35 minutes — the module produces roughly 3000 mutants and each one re-runs the
+tests for its package. To iterate on one package, pass it directly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">RAPID_NOFAILFILE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>go<span class="w"> </span>tool<span class="w"> </span>mutago<span class="w"> </span>--config<span class="w"> </span>mutago.yaml<span class="w"> </span>--coverage<span class="w"> </span>./pkg/phpcs
+</code></pre></div>
+<p>(<code>RAPID_NOFAILFILE=1</code> keeps the property tests from littering <code>testdata/rapid</code> — see
+<a href="#property-based-testing">Property-based testing</a> below. <code>make mutate</code> sets it for you.)</p>
+<p>Each survivor prints as <code>ESCAPED &lt;file&gt;:&lt;line&gt; (&lt;mutator&gt;)</code> with a diff of the change that
+went unnoticed. Read it as a question: <em>which assertion would have caught this?</em></p>
+<h3 id="in-ci">In CI<a class="headerlink" href="#in-ci" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Scope</th>
+<th>Blocking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mutation</code> job in <code>go.yml</code></td>
+<td>Only the lines the pull request changes</td>
+<td><strong>Yes</strong> — fails below 75 % MSI</td>
+</tr>
+<tr>
+<td><code>mutation.yml</code></td>
+<td>The whole module, weekly and on demand</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Scoring the full module on every pull request would be slow and would fail on survivors
+nobody touched, so the gate looks at changed lines only: new code has to be tested properly,
+existing gaps are left to the weekly run. A pull request that changes no mutable code
+generates no mutants and passes.</p>
+<p>The module scored 67 % MSI when mutation testing was introduced, at 90 %+ line coverage
+throughout — the tests ran the code without checking much of it. Every package was then
+brought above the gate, so 75 % is the standard the codebase already meets rather than a
+stretch target.</p>
+<p>Note that a small diff makes the score coarse: with seven mutants, one extra survivor moves
+the number by 14 points. A narrowly-failing pull request usually needs one more assertion,
+not a rewrite.</p>
+<h3 id="what-the-survivors-kept-turning-out-to-be">What the survivors kept turning out to be<a class="headerlink" href="#what-the-survivors-kept-turning-out-to-be" title="Permanent link">&para;</a></h3>
+<p>The same few shapes accounted for most of them, and they are worth recognising before writing
+new tests:</p>
+<ul>
+<li><strong><code>mock.Anything</code> for a <code>context.Context</code>.</strong> By far the biggest single cause. It lets a call
+  site pass <code>nil</code> instead of propagating the context, silently disabling cancellation and the
+  run timeout for everything below it. Match the context instead — exactly where the value is
+  the one under test, or with a non-nil matcher where the workflow derives a child context.</li>
+<li><strong>Asserting absence rather than the result.</strong> <code>assert.NotContains(secret)</code> passes whether the
+  secret was redacted or the whole field was dropped. Assert what the output became.</li>
+<li><strong><code>assert.Contains(err.Error(), …)</code> for a wrapped error.</strong> Removing <code>%w</code> leaves the message
+  unchanged, so only <code>ErrorIs</code>/<code>ErrorAs</code> catches a broken error chain.</li>
+<li><strong>Struct literals nobody reads back.</strong> Request payloads, constructor fields and check
+  results were built and never inspected, so any field could be dropped.</li>
+<li><strong>One malformed input for a multi-clause guard.</strong> A check of three conditions needs one case
+  per clause, or two thirds of it can be deleted unnoticed.</li>
+<li><strong>Error branches that need a failing filesystem.</strong> An in-memory <code>afero.Fs</code> never fails, so
+  write, close and flush error paths stay unreachable until a wrapper makes them fail on
+  demand. <code>internal/report</code> and <code>pkg/drupal</code> both have one to copy.</li>
+</ul>
+<p>The weekly run scores one package per matrix leg rather than the module in one go, so it
+finishes in the time of its slowest package and a failed leg can be re-run on its own. A
+final job sums the per-package counts into the module-wide score and writes both tables to
+the job summary.</p>
+<p>Each leg uploads a <code>mutation-report-&lt;package&gt;</code> artifact containing <code>mutago-agentic.json</code> —
+every survivor with its diff, surrounding context and the test file that should have caught
+it. That is the worklist for improving existing tests.</p>
+<h3 id="when-a-mutant-is-a-false-positive">When a mutant is a false positive<a class="headerlink" href="#when-a-mutant-is-a-false-positive" title="Permanent link">&para;</a></h3>
+<p>Some mutations are genuinely equivalent — logging text, a <code>cap</code> hint on a slice, a defensive
+branch that cannot be reached. Suppress those at the source, never by lowering the threshold:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// mutator-disable-func</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">func</span><span class="w"> </span><span class="nx">alwaysEquivalent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">// mutator-disable-next-line statement/remove</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nx">buf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
+</code></pre></div>
+<p>Use the narrowest form that works — name the specific mutator rather than <code>*</code> — and add a
+comment saying <em>why</em> the mutation is equivalent. If you cannot articulate the reason, the
+mutant is probably telling you about a missing assertion.</p>
+<h2 id="property-based-testing">Property-based testing<a class="headerlink" href="#property-based-testing" title="Permanent link">&para;</a></h2>
+<p>Mutation testing asks whether a test would notice if the code changed. Property-based testing
+asks the other half of the question: whether what the test asserts is true for every input, or
+only for the one somebody typed. An example test says <em><code>SanitizeURL</code> removes the password from
+this URL</em>. A property says <em><code>SanitizeURL</code> removes the password from </em><em>any</em><em> URL</em>, and then goes
+looking for a URL where it does not.</p>
+<p>The tool is <a href="https://github.com/flyingmutant/rapid">rapid</a>. It generates inputs, and when one
+fails it shrinks the counterexample to the smallest input that still fails before reporting it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span><span class="nb">test</span><span class="w">                    </span><span class="c1"># properties run with the rest of the suite, 100 cases each</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>test-property<span class="w">           </span><span class="c1"># only the properties, 10 000 cases each</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./internal/logging<span class="w"> </span>-run<span class="w"> </span>TestProperty<span class="w"> </span>-rapid.checks<span class="o">=</span><span class="m">1000000</span><span class="w">   </span><span class="c1"># one package, hard</span>
+</code></pre></div>
+<p>Every <code>-rapid.*</code> flag has a <code>RAPID_*</code> environment variable twin, and across <code>./...</code> the variable
+is the one to use: rapid registers its flags only in test binaries that import it, so
+<code>-rapid.checks</code> makes <code>go test ./...</code> fail on every package that has no property tests.
+<code>make test-property</code> sets <code>RAPID_CHECKS</code> for that reason.</p>
+<h3 id="the-convention">The convention<a class="headerlink" href="#the-convention" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Properties live in <code>&lt;subject&gt;_property_test.go</code>, next to the ordinary <code>&lt;subject&gt;_test.go</code>.</li>
+<li>Every property is named <code>TestProperty…</code>. That prefix is not decoration: <code>make test-property</code>
+  selects on it, so a property named anything else silently drops out of the deep run.</li>
+<li>Generators stay local to the file that uses them. They are type-specific, and a shared package
+  of them would couple the test files together for no gain.</li>
+<li><strong>A property must not re-implement the function.</strong> If the expected value is computed the same
+  way the code computes it, the test passes by construction. State a law instead — idempotent,
+  order-independent, leaks nothing, round-trips — or compare against a <em>rule</em> that is simpler
+  than the implementation.</li>
+</ul>
+<h3 id="reproducing-a-failure">Reproducing a failure<a class="headerlink" href="#reproducing-a-failure" title="Permanent link">&para;</a></h3>
+<p>Every run uses a <strong>fresh random seed</strong>, so the suite explores new inputs each time and a
+property that passes once is not proven. When one fails, rapid prints how to get it back and
+writes a <code>.fail</code> file next to the test:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>To reproduce, specify -run=&quot;TestPropertyRedactCoversURLEncodedForms&quot;
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  -rapid.failfile=&quot;testdata/rapid/…/…-20260801210044-6470.fail&quot; (or -rapid.seed=11040429362938902097)
+</code></pre></div>
+<p>Commit that file. rapid replays every <code>.fail</code> file it finds before generating anything new, so a
+counterexample found once is checked forever after — the property-test equivalent of adding a
+regression case. Delete it only when the property itself was wrong.</p>
+<div class="admonition warning">
+<p class="admonition-title">Run mutation testing with <code>RAPID_NOFAILFILE=1</code></p>
+<p>A mutation run rewrites the source thousands of times, and every mutant a property kills
+leaves a <code>.fail</code> file behind — hundreds of them, none of which says anything about the real
+code, all of which would then be replayed by the next ordinary test run. <code>make mutate</code> sets
+<code>RAPID_NOFAILFILE=1</code> for exactly that reason. Set it yourself when invoking <code>mutago</code>
+directly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">RAPID_NOFAILFILE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>go<span class="w"> </span>tool<span class="w"> </span>mutago<span class="w"> </span>--config<span class="w"> </span>mutago.yaml<span class="w"> </span>--coverage<span class="w"> </span>./internal/logging
+</code></pre></div>
+<p>If you find <code>testdata/rapid</code> full of files after a mutation run, delete them — the ones
+worth keeping came from a plain <code>go test</code>.</p>
+</div>
+<h3 id="properties-and-the-mutation-gate">Properties and the mutation gate<a class="headerlink" href="#properties-and-the-mutation-gate" title="Permanent link">&para;</a></h3>
+<p>The mutation gate is blocking and the seed is random, which do not mix: a mutant killed only
+because that run happened to generate the right input would pass on one pull request and fail on
+the next. So when a property finds a real bug, fix the code <strong>and</strong> add an ordinary test naming
+the concrete counterexample. The property is the net; the example test is what reliably kills
+the mutant. Both fixes in <code>internal/logging</code> and <code>internal/addon</code> are written that way.</p>
+<p>Keep properties cheap for the same reason — mutation testing re-runs the suite once per mutant,
+so a property that takes a second at 100 cases costs an hour across the module.</p>
+<h3 id="when-not-to-write-one_1">When not to write one<a class="headerlink" href="#when-not-to-write-one_1" title="Permanent link">&para;</a></h3>
+<p>A function with two branches and no interesting input space is a table test, not a property.
+<code>ActiveRunType</code> and <code>tokenRequired</code> are covered better by listing their cases than by generating
+them. Properties earn their keep where the input space is large and the promise is absolute:
+parsers, path handling, ordering, serialisation, and anything that must never leak a credential.</p>
+<h2 id="fuzzing">Fuzzing<a class="headerlink" href="#fuzzing" title="Permanent link">&para;</a></h2>
+<p>Property-based testing asks whether a law holds for every input a <em>generator</em> produces. That
+generator is written by hand, and it only ever produces inputs somebody imagined: rapid's
+<code>StringMatching</code> draws from an alphabet, <code>SliceOfN</code> from a length range. Fuzzing removes that
+ceiling. Go's built-in fuzzer mutates raw bytes and keeps whatever reaches a new branch, so it
+explores the inputs the generator's shape excludes — invalid UTF-8, a lone <code>%</code>, an embedded NUL,
+a path that is nothing but separators.</p>
+<p>The two are complementary, not alternatives, and both are kept on the same code:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Generates</th>
+<th>Finds</th>
+<th>Corpus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rapid</td>
+<td>Structured values from written generators</td>
+<td>A law that is false for a plausible input</td>
+<td><code>testdata/rapid/*.fail</code></td>
+</tr>
+<tr>
+<td><code>go test -fuzz</code></td>
+<td>Arbitrary bytes, guided by coverage</td>
+<td>A branch nothing plausible reaches</td>
+<td><code>testdata/fuzz/&lt;target&gt;/*</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>make<span class="w"> </span><span class="nb">test</span><span class="w">                      </span><span class="c1"># every seed and every committed counterexample, as ordinary tests</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>make<span class="w"> </span>fuzz<span class="w">                      </span><span class="c1"># generative, 30s per target</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>make<span class="w"> </span>fuzz<span class="w"> </span><span class="nv">FUZZTIME</span><span class="o">=</span>5m<span class="w">          </span><span class="c1"># longer</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./internal/codehosting<span class="w"> </span>-run<span class="w"> </span><span class="s1">&#39;^$&#39;</span><span class="w"> </span>-fuzz<span class="w"> </span><span class="s1">&#39;^FuzzParseGitURL$&#39;</span><span class="w"> </span>-fuzztime<span class="w"> </span>1h
+</code></pre></div>
+<p><code>go test -fuzz</code> takes one target at a time and refuses a pattern that matches several, which is
+why <code>make fuzz</code> loops rather than passing <code>./...</code>.</p>
+<h3 id="the-targets">The targets<a class="headerlink" href="#the-targets" title="Permanent link">&para;</a></h3>
+<p>Four, on the code that parses input drupdater does not control:</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FuzzParseGitURL</code></td>
+<td>The repository URL, in both the HTTP and the SCP shape, straight from a CI variable</td>
+</tr>
+<tr>
+<td><code>FuzzLoadConfigFile</code></td>
+<td><code>.drupdater.yaml</code>, including that a rejected file leaves the <code>Config</code> untouched</td>
+</tr>
+<tr>
+<td><code>FuzzAuditUnmarshalJSON</code></td>
+<td><code>composer audit</code> output, across the two shapes composer emits</td>
+</tr>
+<tr>
+<td><code>FuzzRedact</code></td>
+<td>That a registered secret never survives redaction, on bytes no generator would write</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-convention_1">The convention<a class="headerlink" href="#the-convention_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Targets live in <code>&lt;subject&gt;_fuzz_test.go</code>, next to <code>&lt;subject&gt;_test.go</code> and
+  <code>&lt;subject&gt;_property_test.go</code>.</li>
+<li>Every target seeds <code>f.Add</code> with the real shapes <strong>and</strong> the degenerate ones — <code>""</code>, a bare
+  separator, a NUL. Seeds are the fuzzer's starting coverage, and they run on every <code>make test</code>.</li>
+<li>Assert a law, never a second implementation — the same rule properties follow.</li>
+<li>A target that writes to disk should take its directory from <code>f.TempDir()</code> once, outside
+  <code>f.Fuzz</code>, rather than calling <code>t.TempDir()</code> per execution.</li>
+</ul>
+<h3 id="when-a-target-fails">When a target fails<a class="headerlink" href="#when-a-target-fails" title="Permanent link">&para;</a></h3>
+<p>The fuzzer minimises the input, writes it to <code>testdata/fuzz/&lt;target&gt;/&lt;hash&gt;</code>, and prints how to
+re-run it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Failing input written to testdata/fuzz/FuzzParseGitURL/ea812ec424beb350
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>To re-run:
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>go test -run=FuzzParseGitURL/ea812ec424beb350
+</code></pre></div>
+<p><strong>Commit that file.</strong> <code>go test</code> replays everything under <code>testdata/fuzz</code> before generating
+anything new, so the counterexample becomes a permanent regression case — exactly what a <code>.fail</code>
+file does for a property.</p>
+<p>Then do the other half. The mutation gate is blocking and generative exploration is not
+reproducible, so a mutant killed only because a run happened to generate the right input would
+pass on one pull request and fail on the next. <strong>Fix the code, commit the corpus file, and add an
+ordinary test naming the concrete counterexample.</strong> <code>TestParseGitURL</code>'s two <code>.git</code>-segment cases
+and <code>TestAuditUnmarshalShapes</code>'s ordering case are both written that way.</p>
+<div class="admonition note">
+<p class="admonition-title">The generated corpus is not committed</p>
+<p>Inputs the fuzzer finds interesting go to <code>$(go env GOCACHE)/fuzz</code> and are local to the
+machine that found them. Only seeds (in the target) and counterexamples (in <code>testdata/fuzz</code>)
+are checked in. <code>go clean -fuzzcache</code> empties the cache when a stale corpus makes a run slow.</p>
+</div>
+<h3 id="in-ci_1">In CI<a class="headerlink" href="#in-ci_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Scope</th>
+<th>Blocking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test</code> job in <code>go.yml</code></td>
+<td>Seeds and committed counterexamples only, as ordinary tests</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td><code>fuzz.yml</code></td>
+<td>Generative, one leg per target, weekly and on demand</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Fuzzing is deliberately not a pull request gate: whether a generative run finds something is
+partly chance, and failing an unrelated pull request on a coin toss trains people to re-run
+until green. The deterministic half — every seed, every counterexample ever committed — does
+gate, on every push. A failing weekly leg uploads the input as a <code>fuzz-counterexample-&lt;target&gt;</code>
+artifact, ready to commit.</p>
+<h2 id="integration-tests">Integration tests<a class="headerlink" href="#integration-tests" title="Permanent link">&para;</a></h2>
+<p>The Go suite is hermetic: every subprocess and every HTTP call is faked. What a run does to a
+real Drupal site is covered separately, by
+<a href="https://github.com/drupdater/drupdater/blob/main/.github/workflows/integration-test.yml"><code>.github/workflows/integration-test.yml</code></a>,
+which builds the Docker image and runs Drupdater end to end against fixture repositories whose
+<code>composer.lock</code> is deliberately frozen so every run has something to update.</p>
+<p>It never runs on push — each leg installs Drupal for real. There are two ways in:</p>
+<ul>
+<li><strong>Add the <code>integration-test</code> label to a pull request.</strong> Every fixture runs in each mode it
+  declares, always as a dry run, and each leg reports as its own check. Remove and re-add the
+  label to re-run.</li>
+<li><strong>Dispatch it from the Actions tab</strong> to aim at a single repository and branch, pick the mode,
+  or do a real (non-dry) run.</li>
+</ul>
+<h3 id="the-fixtures">The fixtures<a class="headerlink" href="#the-fixtures" title="Permanent link">&para;</a></h3>
+<p>Registered in <a href="https://github.com/drupdater/drupdater/blob/main/.github/integration-fixtures.json"><code>.github/integration-fixtures.json</code></a>.
+Adding one is appending an entry — the workflow needs no edit.</p>
+<table>
+<thead>
+<tr>
+<th>Fixture</th>
+<th>Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>drupal-cms</code></td>
+<td>The heavy end of the addon catalogue: recipes, patches, PHPCBF, Rector, normalisation, against a single site</td>
+</tr>
+<tr>
+<td><code>drupal-multisite</code></td>
+<td>Two sites over one codebase, so the per-site phases run concurrently against separate configuration trees</td>
+</tr>
+<tr>
+<td><code>multisite-patches</code></td>
+<td>A patch that stops applying when its package moves, so <code>composer_patches</code> has to report a conflict</td>
+</tr>
+<tr>
+<td><code>multisite-shallow</code></td>
+<td>Preflight rejecting a <code>--depth 1</code> checkout</td>
+</tr>
+<tr>
+<td><code>multisite-lock-conflict</code></td>
+<td>A root constraint the locked version does not satisfy, so <code>composer install</code> refuses</td>
+</tr>
+<tr>
+<td><code>multisite-missing-site</code></td>
+<td>A configured site with no directory, so one of the concurrent baseline installs fails</td>
+</tr>
+</tbody>
+</table>
+<p>The last four exist because assertions that only ever see a successful run cannot catch a
+regression that makes Drupdater fail in the wrong place, or report a failure as a success.</p>
+<p>No fixture covers a failure in <code>update shared code</code>. <code>composer install</code> validates the lock
+against <code>composer.json</code>, so almost any breakage of the latter is caught one phase earlier; a
+failure that first appears during the update needs a lock that agrees with <code>composer.json</code> but
+cannot be resolved forward, which depends on upstream state no fixture can pin down.</p>
+<p>An entry may narrow <code>modes</code> (default: both <code>normal</code> and <code>security</code>) and set <code>shallow</code>. A fixture
+whose <code>expect.status</code> contains <code>failed</code> is a <strong>failure fixture</strong>: Drupdater is expected to exit
+non-zero, and the leg fails if it exits <code>0</code> instead.</p>
+<h3 id="what-each-leg-asserts">What each leg asserts<a class="headerlink" href="#what-each-leg-asserts" title="Permanent link">&para;</a></h3>
+<p>The run report is the verdict, not the exit status — Drupdater exits <code>0</code> on an abort, and a run
+reports <code>success</code> even when an addon logged and swallowed its own failure. On top of
+<code>assert-report.jq</code> (see <a href="../../how-to/consume-the-run-report/">Consume the run report</a>), a
+successful leg also checks the repository the run left behind: that HEAD is the branch the report
+names, that it descends from the base branch, that nothing is left uncommitted, that
+<code>composer.lock</code> agrees with the report's package list, and that running Drupdater a second time
+finds nothing left to do.</p>
+<h2 id="mocks">Mocks<a class="headerlink" href="#mocks" title="Permanent link">&para;</a></h2>
+<p>Mocks are generated by <a href="https://vektra.github.io/mockery/">mockery v3</a>, configured in
+<code>.mockery.yml</code> to cover the whole module recursively.</p>
+<p>After changing any interface:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>make<span class="w"> </span>mock
+</code></pre></div>
+<p>mockery's <code>testify</code> template emits one consolidated <code>mocks_test.go</code> per package, in the
+package it mocks. Do not edit those files by hand.</p>
+<h2 id="code-layout">Code layout<a class="headerlink" href="#code-layout" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main.go</code> → <code>cmd/</code></td>
+<td>Cobra commands, flag parsing, service construction, the addon registry</td>
+</tr>
+<tr>
+<td><code>internal/services/</code></td>
+<td>The workflow, its phases, events, and preflight checks</td>
+</tr>
+<tr>
+<td><code>internal/addon/</code></td>
+<td>The addons, their report data, and their description templates</td>
+</tr>
+<tr>
+<td><code>internal/codehosting/</code></td>
+<td>The GitHub and GitLab implementations and the provider factory</td>
+</tr>
+<tr>
+<td><code>internal/report/</code></td>
+<td>The published JSON report schema and its writer</td>
+</tr>
+<tr>
+<td><code>internal/logging/</code></td>
+<td>The redactor</td>
+</tr>
+<tr>
+<td><code>pkg/</code></td>
+<td>Thin wrappers around external tools</td>
+</tr>
+<tr>
+<td><code>scripts/</code></td>
+<td>PHP helper scripts copied into the Docker image</td>
+</tr>
+</tbody>
+</table>
+<p><code>pkg/</code> wraps one external tool per directory: <code>composer</code>, <code>drush</code>, <code>repo</code> (go-git),
+<code>phpcs</code>, <code>rector</code>, <code>drupal</code> (site installer) and <code>drupalorg</code> (Drupal.org HTTP client).</p>
+<p>For how these fit together, read <a href="../../explanation/">Explanation</a> — in particular
+<a href="../../explanation/how-a-run-works/">How a run works</a> and <a href="../../explanation/addon-architecture/">The addon
+architecture</a>.</p>
+<h2 id="description-templates">Description templates<a class="headerlink" href="#description-templates" title="Permanent link">&para;</a></h2>
+<p>Templates in <code>internal/addon/templates/</code> render into the pull request description. Keep
+them consistent with the existing style:</p>
+<ul>
+<li>Section headers: <code>## {emoji} **{Title}**</code></li>
+<li>Table cells: always use the <code>{{ cell }}</code> helper, which escapes pipe characters and
+  newlines</li>
+<li>Wrap long sections in <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code>, as the existing templates do</li>
+<li><strong>Always verify the output with <code>--dry-run</code> before shipping a new template</strong></li>
+</ul>
+<p>Each template has a golden file in <code>internal/addon/testdata/</code>. Those files are embedded
+directly into this documentation, so updating one updates the published example too.</p>
+<h2 id="docker-image">Docker image<a class="headerlink" href="#docker-image" title="Permanent link">&para;</a></h2>
+<p>Multi-stage: a Go build stage, then the PHP runtime image the binary is copied into.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>make<span class="w"> </span>docker-build
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>docker<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">PHP_VERSION</span><span class="o">=</span><span class="m">8</span>.4<span class="w"> </span>-t<span class="w"> </span>drupdater-local:php8.4<span class="w"> </span>.
+</code></pre></div>
+<p><code>PHP_VERSION</code> defaults to <code>8.3</code>. Released images are built for 8.2, 8.3, 8.4 and 8.5.</p>
+<h2 id="devcontainer">Devcontainer<a class="headerlink" href="#devcontainer" title="Permanent link">&para;</a></h2>
+<p><code>.devcontainer/devcontainer.json</code> builds the repository's own Dockerfile with PHP 8.3 and
+adds the Go toolchain and Docker-in-Docker, so the full toolchain including <code>make mock</code>
+works inside it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Contributing">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Contributing
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../writing-an-addon/" class="md-footer__link md-footer__link--next" aria-label="Next: Writing an addon">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Writing an addon
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Licensed under the Apache License 2.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/drupdater/drupdater" target="_blank" rel="noopener" title="Drupdater on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
